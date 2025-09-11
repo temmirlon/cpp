@@ -1,31 +1,24 @@
 #include <iostream>
 #include <string>
+#include <vector>
+#include <map>
 #include <algorithm>
 
-//Anagram
+std::string reverse(const std::string& text) {
+    if (text.size() == 0)
+        return "";
+    return reverse(text.substr(1)) + text.at(0);
+}
 
-bool isAnagramm(std::string text1, std::string text2) {
-    std::transform(text1.begin(), text1.end(), text1.begin(), tolower);
-    std::transform(text2.begin(), text2.end(), text2.begin(), tolower);
-
-    if (text1.size() != text2.size())
-        return false;
-
-    for (int i = 0; i < text2.size(); i++)
-    {
-        if (text1.find(text2.at(i)) == std::string::npos)
-            return false;
-        text1.erase(text1.find(text2.at(i)), 1);
-    }
-    return true;
+bool isPalindrom(std::string& text){
+    std::transform(text.begin(), text.end(), text.begin(), tolower);
+    if (text.size() == 1 || text == reverse(text))
+        return true;
+    return false;
 }
 
 int main() {
-
-    std::string word = "aacc";
-    std::string word2 = "ccac";
-
-    //std::cout << word.size() << std::endl; // - word.size() - 5
-    std::cout << isAnagramm(word, word2) << std::endl;
+    std::string word = "Lagerregal";
+    std::cout << isPalindrom(word) << std::endl;
     return 0;
 }
