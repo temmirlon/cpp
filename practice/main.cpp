@@ -2,19 +2,26 @@
 #include <string>
 #include <vector>
 
-
-typedef std::vector<int> int_vector;
-typedef std::vector<float> float_vector;
+class Person {
+private:
+    int age;
+    std::string name;
+public:
+    Person(int a, std::string n){
+        age = a;
+        name = n;
+    }
+    
+    void get_info(){
+        std::cout << name << ": "<< age << std::endl;
+    }
+};
 
 int main(){
     
-    std::vector<int> my_vector;
+    Person child(10, "Ali");
     
-    int_vector my_vector2;
-    float_vector my_float_vector;
-    
-    int_vector my_vector3;
-    
+    child.get_info();
     
     return 0;
 }
