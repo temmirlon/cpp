@@ -2,26 +2,19 @@
 #include <string>
 #include <vector>
 
-class Person {
-private:
-    int age;
-    std::string name;
-public:
-    Person(int a, std::string n){
-        age = a;
-        name = n;
-    }
-    
-    void get_info(){
-        std::cout << name << ": "<< age << std::endl;
-    }
-};
+
+void divide(double a, int b){
+    if (b == 0) throw 404;
+    else std::cout<< a/b << std::endl;
+}
 
 int main(){
     
-    Person child(10, "Ali");
-    
-    child.get_info();
+    try {
+        divide(5.0f, 0);
+    } catch (int err){
+        if (err == 404) std::cout<< "Dividing error!"<<std::endl;
+    }
     
     return 0;
 }
