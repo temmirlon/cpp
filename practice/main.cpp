@@ -1,20 +1,53 @@
 #include <iostream>
 #include <string>
-#include <vector>
 
 
-void divide(double a, int b){
-    if (b == 0) throw 404;
-    else std::cout<< a/b << std::endl;
-}
+// Base class
+class Animal {
+public:
+    std::string name;
+    
+    Animal(std::string n) : name(n) {}
+    
+    virtual void speak(){
+        std::cout << "making voice" << std::endl;
+    }
+    
+};
+
+// Derived Class (произвольный класс)
+
+class Dog : public Animal {
+public:
+    
+    Dog (std::string name) : Animal(name) {}
+    
+    void speak() override{
+        std::cout << "Gav Gav!" << std::endl;
+    }
+    
+};
+
+
+// Another derived class
+
+class Cat : public Animal{
+public:
+    Cat (std::string name) : Animal(name) {}
+    
+    void speak() override{
+        std::cout << "Mew Mew!" << std::endl;
+    }
+};
+
 
 int main(){
     
-    try {
-        divide(5.0f, 0);
-    } catch (int err){
-        if (err == 404) std::cout<< "Dividing error!"<<std::endl;
-    }
+    int x = 5;
+    
+    int *p = &x;
+    std::cout << "&x = " << &x << std::endl;
+    std::cout << "*p = " << *p << std::endl;
     
     return 0;
 }
