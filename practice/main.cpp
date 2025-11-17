@@ -1,56 +1,59 @@
 #include <iostream>
 #include <string>
-#include <set>
 #include <map>
 
+// map
 
 int main(){
     
-    // set
+    // PAIR
     
-//    std::set<int> mySet = {1,5,3,12,-4,9};
+    //std::pair<int, std::string> p(1, "iphone");
     
-//    int value;
-//    
-//    std::cin >> value;
-//    
-//    if (mySet.find(value) != mySet.end()) {
-//        std::cout<< "Number " << value << " is found!" << std::endl;
-//    } else {
-//        std::cout<< "Number " << value << " is not found!" << std::endl;
-//    }
+    std::map<int, std::string> my_map; // Contains only uniq values(key). binary tree through first element (in this case is int)
     
-//    mySet.erase(5); // delete element in set
-//    mySet.insert(64); // add element in set
+    my_map.emplace(3,"ipad"); // creates element directly in map
+    
+    my_map.insert(std::make_pair(1, "iphone")); // creates elements and than copies or moves to our map
+    
+    my_map.insert(std::pair<int, std::string>(2,"macbook"));
+    
+    my_map.emplace(22, "keyboard");
     
     
-//    auto result = mySet.insert(1); // .insert() returns pair<int, bool> first, second
-//    
-//    for (auto &item : mySet) {
-//        std::cout << item << std::endl;
-//    }
+    auto it = my_map.find(10); // returns ITERATOR that points to pair that we looking for. if doesn't exist returns .end()
     
-    
-    // multi set // can have same elemenets
-    
-    
-    std::multiset<int> mymultiSet = {12,1,1,6,4,-5};
-    
-//    mymultiSet.insert(4);
-//    mymultiSet.insert(4);
-//    mymultiSet.insert(4);
-
-    
-//    auto it1 = mymultiSet.lower_bound(1);
-//    
-//    auto it2 = mymultiSet.upper_bound(1); // return 4, because after first 1 comes 4 than 6 etc.
-    
-    auto a = mymultiSet.equal_range(1); // return range of it1(lower_bound) and it2(upper_bound)
-    
-    for (auto &item : mymultiSet) {
-        std::cout << item << std::endl;
+    if (it != my_map.end()) {
+        std::cout << it->second << std::endl;
+    } else {
+        std::cout << "Element is not found!" << std::endl;
     }
     
+    
+    auto res = my_map.emplace(3, "powerbank"); // trying to add a value. returns PAIR (value of map, bool (exist or not))
+    std::cout<< res.second << std::endl; // returns 0 -> FALSE
+    std::cout << my_map[1] << std::endl; // get value through key
+    
+    
+    
+    std::map<std::string, int> myMap; // the key is STRING
+    
+    myMap.emplace("Timo", 5125);
+    myMap.emplace("Emka", 4850);
+    myMap.emplace("Zema", 5750);
+    
+    std::cout << myMap["Timo"] << std::endl;
+    
+    for (auto &[key, val] : myMap) {
+        std::cout << "Key: " << key << ", Value: " << val << std::endl;
+    }
+    
+    std::cout << "Delete Timo from map... and print out.." << std::endl;
+    myMap.erase("Timo"); //
+    
+    for (auto &[key, val] : myMap) {
+        std::cout << "Key: " << key << ", Value: " << val << std::endl;
+    }
     
     return 0;
 }
