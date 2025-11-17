@@ -1,53 +1,56 @@
 #include <iostream>
 #include <string>
-
-
-// Base class
-class Animal {
-public:
-    std::string name;
-    
-    Animal(std::string n) : name(n) {}
-    
-    virtual void speak(){
-        std::cout << "making voice" << std::endl;
-    }
-    
-};
-
-// Derived Class (произвольный класс)
-
-class Dog : public Animal {
-public:
-    
-    Dog (std::string name) : Animal(name) {}
-    
-    void speak() override{
-        std::cout << "Gav Gav!" << std::endl;
-    }
-    
-};
-
-
-// Another derived class
-
-class Cat : public Animal{
-public:
-    Cat (std::string name) : Animal(name) {}
-    
-    void speak() override{
-        std::cout << "Mew Mew!" << std::endl;
-    }
-};
+#include <set>
+#include <map>
 
 
 int main(){
     
-    int x = 5;
+    // set
     
-    int *p = &x;
-    std::cout << "&x = " << &x << std::endl;
-    std::cout << "*p = " << *p << std::endl;
+//    std::set<int> mySet = {1,5,3,12,-4,9};
+    
+//    int value;
+//    
+//    std::cin >> value;
+//    
+//    if (mySet.find(value) != mySet.end()) {
+//        std::cout<< "Number " << value << " is found!" << std::endl;
+//    } else {
+//        std::cout<< "Number " << value << " is not found!" << std::endl;
+//    }
+    
+//    mySet.erase(5); // delete element in set
+//    mySet.insert(64); // add element in set
+    
+    
+//    auto result = mySet.insert(1); // .insert() returns pair<int, bool> first, second
+//    
+//    for (auto &item : mySet) {
+//        std::cout << item << std::endl;
+//    }
+    
+    
+    // multi set // can have same elemenets
+    
+    
+    std::multiset<int> mymultiSet = {12,1,1,6,4,-5};
+    
+//    mymultiSet.insert(4);
+//    mymultiSet.insert(4);
+//    mymultiSet.insert(4);
+
+    
+//    auto it1 = mymultiSet.lower_bound(1);
+//    
+//    auto it2 = mymultiSet.upper_bound(1); // return 4, because after first 1 comes 4 than 6 etc.
+    
+    auto a = mymultiSet.equal_range(1); // return range of it1(lower_bound) and it2(upper_bound)
+    
+    for (auto &item : mymultiSet) {
+        std::cout << item << std::endl;
+    }
+    
     
     return 0;
 }
