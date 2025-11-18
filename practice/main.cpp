@@ -1,59 +1,38 @@
 #include <iostream>
 #include <string>
 #include <map>
+#include <vector>
+// leetcode
 
-// map
+std::vector<int> topKFrequent(std::vector<int>& nums, int k){
+    std::map<int,int> freq;
+
+    // Считаем количество вхождений каждого числа
+    for (int num : nums) {
+        freq[num]++;
+    }
+    // Копируем пары в вектор для сортировки
+    std::vector<std::pair<int,int>> vec(freq.begin(), freq.end());
+    
+    // Сортируем по значению по убыванию
+    std::sort(vec.begin(), vec.end(),
+                [](const std::pair<int,int>& a, const std::pair<int,int>& b){
+                    return a.second > b.second;
+                });
+    // Берём первые k элементов
+    
+    std::vector<int> result;
+    for (int i = 0; i < k && i < vec.size(); i++) {
+        result.push_back(vec[i].first);  // добавляем сам элемент, а не частоту
+    }
+    
+    return result;
+}
 
 int main(){
     
-    // PAIR
+    std::vector<int> nums = {1,1,1,3,7,7,1,7,2,2,3};
     
-    //std::pair<int, std::string> p(1, "iphone");
-    
-    std::map<int, std::string> my_map; // Contains only uniq values(key). binary tree through first element (in this case is int)
-    
-    my_map.emplace(3,"ipad"); // creates element directly in map
-    
-    my_map.insert(std::make_pair(1, "iphone")); // creates elements and than copies or moves to our map
-    
-    my_map.insert(std::pair<int, std::string>(2,"macbook"));
-    
-    my_map.emplace(22, "keyboard");
-    
-    
-    auto it = my_map.find(10); // returns ITERATOR that points to pair that we looking for. if doesn't exist returns .end()
-    
-    if (it != my_map.end()) {
-        std::cout << it->second << std::endl;
-    } else {
-        std::cout << "Element is not found!" << std::endl;
-    }
-    
-    
-    auto res = my_map.emplace(3, "powerbank"); // trying to add a value. returns PAIR (value of map, bool (exist or not))
-    std::cout<< res.second << std::endl; // returns 0 -> FALSE
-    std::cout << my_map[1] << std::endl; // get value through key
-    
-    
-    
-    std::map<std::string, int> myMap; // the key is STRING
-    
-    myMap.emplace("Timo", 5125);
-    myMap.emplace("Emka", 4850);
-    myMap.emplace("Zema", 5750);
-    
-    std::cout << myMap["Timo"] << std::endl;
-    
-    for (auto &[key, val] : myMap) {
-        std::cout << "Key: " << key << ", Value: " << val << std::endl;
-    }
-    
-    std::cout << "Delete Timo from map... and print out.." << std::endl;
-    myMap.erase("Timo"); //
-    
-    for (auto &[key, val] : myMap) {
-        std::cout << "Key: " << key << ", Value: " << val << std::endl;
-    }
     
     return 0;
 }
