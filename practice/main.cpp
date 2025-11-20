@@ -37,25 +37,17 @@ void doWork(std::vector<int> &vc,  std::function<void(int)> func){
 
 int main(){
     
-    int p = 0;
+    // как лямбда функция определяет какой тип возвращаемого значения у нее есть
     
-    auto f = [&p](){
+    auto l_one = [](int a, int b){
         
-        p = 5;
+        return a + b; // должно что то возвращать
         
     };
     
-    f();
+    auto l_two = l_one(4, 3); // type of l_two is "int". depends of what we return from l_one lambda
     
-    std::cout << p << std::endl; // 5
-    
-//    std::vector<int> nums = {11,23,53,34,89,9,40,76,37,55,29,23,39,26};
-//    doWork(nums, [](int a) // анонимная функция
-//    {
-//        if (a % 3 == 0) {
-//            std::cout << "lambda: " << a << std::endl;
-//        }
-//    });
+    std::cout << l_two << std::endl;
     
     return 0;
 }
