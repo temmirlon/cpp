@@ -25,6 +25,8 @@ void baz(int a){
     std::cout << "baz" << std::endl;
 }
 
+
+
 void doWork(std::vector<int> &vc,  std::function<void(int)> func){
     
     for (auto el : vc) {
@@ -39,12 +41,10 @@ int main(){
     
     std::function<void(int)> f;
     
-    f = [](int a) // анонимная функция
+    doWork(nums, [](int a) // анонимная функция
     {
         std::cout << "anonymous function is called: " << a << std::endl;
-    };
-    
-    doWork(nums, f);
+    });
     
     return 0;
 }
