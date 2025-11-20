@@ -1,54 +1,50 @@
 #include <iostream>
 #include <string>
+#include <functional>
+#include <vector>
+
+// Lambda function
+// Лябмда функции
 
 
-/* Пространство имен - namespace */
-
-namespace firstns {
-    void func() {
-        std::cout << "func first" << std::endl;
-    }
-
-    int a;
+void foo(int a){                                    // сигнатура у всех должна быть одинаковая
     
-    class Point{
-        
-    };
-
-}
-
-namespace secondns {
-    void func() {
-        std::cout << "func second" << std::endl;
-    }
-
-    int b;
-
-    class Point{
-        
-    };
-
-}
-
-namespace thirdns {
-    namespace secondns {
-        void func() {
-            std::cout << "func third" << std::endl;
-        }
+    if (a > 10 && a < 40) {
+        std::cout << "foo: " << a << std::endl;
     }
 }
 
-using namespace firstns;
+void bar(int a){
+    
+    if (a % 2 == 0) {
+        std::cout << "bar: " << a << std::endl;
+    }
+}
+
+void baz(int a){
+    std::cout << "baz" << std::endl;
+}
+
+void doWork(std::vector<int> &vc,  std::function<void(int)> func){
+    
+    for (auto el : vc) {
+        func(el);
+    }
+    
+}
 
 int main(){
     
-    func(); // output func first
+    std::vector<int> nums = {11,23,53,34,89,9,40,76,37,55,29,23,39,26};
     
-    firstns::func();
-    secondns::func();
-    thirdns::secondns::func();
+    std::function<void(int)> f;
     
-    firstns::Point pointt;
+    f = [](int a) // анонимная функция
+    {
+        std::cout << "anonymous function is called: " << a << std::endl;
+    };
+    
+    doWork(nums, f);
     
     return 0;
 }
