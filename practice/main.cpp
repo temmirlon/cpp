@@ -37,14 +37,25 @@ void doWork(std::vector<int> &vc,  std::function<void(int)> func){
 
 int main(){
     
-    std::vector<int> nums = {11,23,53,34,89,9,40,76,37,55,29,23,39,26};
+    int p = 0;
     
-    std::function<void(int)> f;
+    auto f = [&p](){
+        
+        p = 5;
+        
+    };
     
-    doWork(nums, [](int a) // анонимная функция
-    {
-        std::cout << "anonymous function is called: " << a << std::endl;
-    });
+    f();
+    
+    std::cout << p << std::endl; // 5
+    
+//    std::vector<int> nums = {11,23,53,34,89,9,40,76,37,55,29,23,39,26};
+//    doWork(nums, [](int a) // анонимная функция
+//    {
+//        if (a % 3 == 0) {
+//            std::cout << "lambda: " << a << std::endl;
+//        }
+//    });
     
     return 0;
 }
