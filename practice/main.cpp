@@ -2,15 +2,29 @@
 #include <string>
 #include <vector>
 
+// Поля структуры доступны напрямую извне
+struct Point{
+    int x, y;
+};
 
+
+// Поля класса недоступны по умолчанию вне класса
+class Point2D {
+    int x,y;
+};
 
 int main(){
     
-    std::vector<int> nums = {1,4,3,2,5,6,4};
+    Point pt;
+    Point* ptr_pt = new Point;
     
-    for (size_t i = 0; i < nums.size(); ++i) {
-        std::cout << nums.at(i) << std::endl;
-    };
+    pt.x = 10;
+    
+    
+    Point2D pt2d;
+    Point2D *ptr_pt2 = new Point2D;
+    
+    pt2d.x = 10; // ловим ошибку "x" is a 'PRIVATE' member of 'Point2D'
     
     return 0;
 }
