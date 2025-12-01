@@ -1,39 +1,49 @@
 #include <iostream>
+#include <math.h>
 #include <string>
 #include <vector>
 
-// Поля структуры доступны напрямую извне
-struct Point{
-    int x, y;
-};
+// Ограничение доступа - это способ защититы программсита от возможного неправильного использования класса, а не от злоумышленников
 
-
-// Поля класса недоступны по умолчанию вне класса
+// Ограничение доступа private и public работает на уровне классов, а не на уровне объектов
 class Point2D {
-    int x,y;
+    
+private:
+    int x,y; // все что находится в приватной зоне предназначено исключительно для внутреннего пользования
     
 public:
-    void set_coords(int a, int b)
-    { x = a; y = b; } // {this->x = a;, this->y = b} одно и то же
-    void get_coords(int& a, int& b)
-    { a = x; b = y; }
+    void set_coords(int a, int b) {
+        x = a;
+        y = b;
+    }
+    void get_coords(int& a, int& b) {
+        a = x;
+        b = y;
+    }
+    
+    bool set_cord_range(int a, int b, int min_cord = 0, int max_cord = 100){
+        
+        if (a < min_cord || a > max_cord || b < min_cord || b > max_cord)
+            return false;
+        
+        set_coords(a, b);
+        return true;
+    }
+    
+    double length_to(const Point2D& pt){
+        return sqrt(((x-pt.x) * (x-pt.x) + (y-pt.y) * (y-pt.y)));
+    }
 };
 
 int main(){
-    // ловим ошибку: потому что не связан ни с каким объектом
-    // неявный указатель this не определен
-    Point2D::set_coords(4, 3);
     
+    Point2D pt, endp;
+    pt.set_coords(1, 2);
+    endp.set_coords(10, 20);
     
-    Point2D pt1;
-    Point2D *ptr_pt = new Point2D; // создается в куче (heap), нужно освобождать память в конце
+    double len = pt.length_to(endp);
     
-    // сюда автоматичекски передаются указатель с именем this
-    // this (указатель) ссылается на тот объект через который был вызван данный метод
-    pt1.set_coords(1, 2);
-    
-    
-    delete ptr_pt;
+    std::cout << len << std::endl;
     
     return 0;
-}
+};
