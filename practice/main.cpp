@@ -3,15 +3,21 @@
 #include <string>
 #include <vector>
 
-// Ограничение доступа - это способ защититы программсита от возможного неправильного использования класса, а не от злоумышленников
+// Конструкторы
 
-// Ограничение доступа private и public работает на уровне классов, а не на уровне объектов
+// Имя конструктора должно совпадать с именем типа данных
+// ... никогда не возвращает никаких значений, поэтому возвращаемый тип не прописывается
+// ... может иметь произвольное (любое) число параметров
+// ... всегда вызывается при создании каждого нового объекта
+
 class Point2D {
-    
-private:
-    int x,y; // все что находится в приватной зоне предназначено исключительно для внутреннего пользования
-    
+    const unsigned max_coord;
+    int x,y;
+
 public:
+    Point2D() : max_coord(100), x(0), y(0) // порядок перемен должен совпадать. const нельзя инициализировать в теле
+        { } // Тело конструктора
+    
     void set_coords(int a, int b) {
         x = a;
         y = b;
@@ -21,29 +27,23 @@ public:
         b = y;
     }
     
-    bool set_cord_range(int a, int b, int min_cord = 0, int max_cord = 100){
-        
-        if (a < min_cord || a > max_cord || b < min_cord || b > max_cord)
-            return false;
-        
-        set_coords(a, b);
-        return true;
-    }
-    
-    double length_to(const Point2D& pt){
-        return sqrt(((x-pt.x) * (x-pt.x) + (y-pt.y) * (y-pt.y)));
-    }
 };
 
 int main(){
     
-    Point2D pt, endp;
-    pt.set_coords(1, 2);
-    endp.set_coords(10, 20);
     
-    double len = pt.length_to(endp);
+    Point2D pt;
+    Point2D* ptr_pt = new Point2D;
     
-    std::cout << len << std::endl;
+    int x, y;
+    
+    pt.get_coords(x, y);
+    std::cout << x << " " << y <<std::endl;
+    
+    ptr_pt->get_coords(x, y);
+    std::cout << x << " " << y <<std::endl;
+    
+    delete ptr_pt;
     
     return 0;
 };
