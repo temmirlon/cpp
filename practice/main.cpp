@@ -1,52 +1,46 @@
 #include <iostream>
+#include <string>
 
 
 /*
-    Конструтор преобразования. Деструктор
  
+ Инкапсуляция. Методы get и set
+
  */
 
 
-class Complex{
-    double re;
-    double im;
+class Point{
+private:
+    int x;
+    int y;
+    int z;
     
+
 public:
-    Complex() : re(0.0), im(0.0) {}
     
-    // Конструктор преобразования - Conversion constructor
-    Complex(double real) : re(real), im(0.0) {}
+    int GetY(){ return y; }
+    void SetY(int valueY) { y = valueY; }
     
-    Complex(double real, double imag) : re(real), im(imag) {}
+    int GetX(){ return x; }
+    void SetX(int valueX) { x = valueX; }
     
-    void get_data(double& re, double& im){
-        re = this->re;
-        im = this->im;
+    void Print(){
+        std::cout << "X = " << x << "\t Y = " << y << std::endl;
     }
-    
-    const Complex& Add(Complex& other){
-        this->re += other.re;
-        this->im += other.im;
-        
-        return *this;
-    }
-    
     
 };
 
 
 int main(){
     
-    Complex c1;
-    Complex c2(0.5); // {0.5} or c2 = 0.5
-    Complex c3{-5.4, 7.8};
+    Point a;
+    a.SetY(11);
+    a.SetX(5);
+    a.Print();
     
-    c2.Add(c3);
+    int res = a.GetX();
     
-    double re, im;
-    c2.get_data(re, im);
-    
-    std::cout << re << " " << im << std::endl;
+    std::cout << res << std::endl;
     
     return 0;
 }
