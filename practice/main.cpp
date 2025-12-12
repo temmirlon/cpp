@@ -30,17 +30,30 @@ public:
     
 };
 
+class CoffeeGrinder{
+private:
+    
+    bool checkVoltage(){
+        return true;
+    }
+    
+public:
+    void Start(){
+        
+        if (checkVoltage()){
+            std::cout << "vhjuuuuuuHH!" << std::endl;
+        } else {
+            std::cout << "Beep Beep!" << std::endl;
+        }
+        
+    }
+    
+};
 
 int main(){
     
-    Point a;
-    a.SetY(11);
-    a.SetX(5);
-    a.Print();
-    
-    int res = a.GetX();
-    
-    std::cout << res << std::endl;
-    
+    CoffeeGrinder a;
+    a.Start();
+
     return 0;
 }
