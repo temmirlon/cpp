@@ -18,6 +18,11 @@ private:
 
 public:
     
+    Point(int valueX, int valueY){
+        x = valueX;
+        y = valueY;
+    }
+    
     int GetY(){ return y; }
     void SetY(int valueY) { y = valueY; }
     
@@ -52,8 +57,7 @@ public:
 
 int main(){
     
-    CoffeeGrinder a;
-    a.Start();
+    Point a(3, 4);
 
     return 0;
 }
