@@ -79,18 +79,27 @@ public:
 };
 
 class MyClass{
-    int data;
+private:
+    int* data;
+
 public:
-    MyClass(int value){
-        data = value;
-        std::cout << "Object " << value << " The constructor has been called." << std::endl;
+    MyClass(int size){
+        
+        
+        data = new int[size];
+        
+        for (size_t i = 0; i < size; ++i) {
+            data[i] = 1;
+        }
+        
+        std::cout << "Object " << data << " The constructor has been called." << std::endl;
     }
     
     // Всегда один деструтор в классе
     ~MyClass(){
         
+        delete[] data;
         std:: cout << "Object " << data << " The destructor has been called." << std::endl;
-        
     }
     
 };
@@ -107,8 +116,8 @@ void func(){
 int main(){
     
     func();
-    
     // Объекты уничтожаются в порядке обратно тому в котором они создавались
     
     return 0;
 }
+    
