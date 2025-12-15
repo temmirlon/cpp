@@ -4,8 +4,10 @@
 
 /*
  
- Перегрузка конструкторов класса
-
+ Деструктор - действие после уничтожение объекта класса.
+ (Когда наш объект уйдет из зоны видимости  функции)
+ Деструктор не может иметь аргументы и не имеет возвращаемого типа, так как его главная задача — автоматически освобождать ресурсы объекта при его уничтожении, и он вызывается неявно компилятором, а не разработчиком с передачей параметров, как обычная функция.
+ 
  */
 
 
@@ -56,7 +58,6 @@ public:
     }
     
 };
-
 class CoffeeGrinder{
 private:
     
@@ -77,17 +78,37 @@ public:
     
 };
 
+class MyClass{
+    int data;
+public:
+    MyClass(int value){
+        data = value;
+        std::cout << "Object " << value << " The constructor has been called." << std::endl;
+    }
+    
+    // Всегда один деструтор в классе
+    ~MyClass(){
+        
+        std:: cout << "Object " << data << " The destructor has been called." << std::endl;
+        
+    }
+    
+};
+
+
+void func(){
+    
+    std::cout << "FUNC. Start of execution" << std::endl;
+    MyClass a(1);
+    std::cout << "FUNC. End of execution." << std::endl;
+};
+
+
 int main(){
     
-    Point a;
-    a.Print();
+    func();
     
-    Point b(3, 5);
-    b.Print();
-    
-    
-    Point c(3, false); // if true y = 1, else -1
-    c.Print();
+    // Объекты уничтожаются в порядке обратно тому в котором они создавались
     
     return 0;
 }
