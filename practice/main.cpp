@@ -4,119 +4,62 @@
 
 /*
  
- Деструктор - действие после уничтожение объекта класса.
- (Когда наш объект уйдет из зоны видимости  функции)
- Деструктор не может иметь аргументы и не имеет возвращаемого типа, так как его главная задача — автоматически освобождать ресурсы объекта при его уничтожении, и он вызывается неявно компилятором, а не разработчиком с передачей параметров, как обычная функция.
+ Ключевое слово this
  
  */
-
 
 class Point{
 private:
     int x;
     int y;
-    int z;
     
-
 public:
     
     // Перегрузка 1
     Point(){
         x = 0;
         y = 0;
+        
+        std::cout << this << " contructor" << std::endl;
+        
     };
     
     // Перегрузка 2
     Point(int valueX, int valueY){
         x = valueX;
         y = valueY;
+        
+        std::cout << this << " contructor" << std::endl;
     }
     
-    // Перегрузка 3
-    Point(int valueX, bool boolean){
-        
+    
+    int GetY(){
+        return y;
+    }
+    
+    void SetY(int y) {
+        this->y = y;
+    }
+    
+    int GetX(){
+        return x;
+    }
+    
+    void SetX(int valueX) {
         x = valueX;
-        
-        if(boolean)
-        {
-            y = 1;
-        } else
-        {
-            y = -1;
-        }
-        
-    };
-    
-    int GetY(){ return y; }
-    void SetY(int valueY) { y = valueY; }
-    
-    int GetX(){ return x; }
-    void SetX(int valueX) { x = valueX; }
+    }
     
     void Print(){
         std::cout << "X = " << x << "\t Y = " << y << std::endl;
     }
     
 };
-class CoffeeGrinder{
-private:
-    
-    bool checkVoltage(){
-        return true;
-    }
-    
-public:
-    void Start(){
-        
-        if (checkVoltage()){
-            std::cout << "vhjuuuuuuHH!" << std::endl;
-        } else {
-            std::cout << "Beep Beep!" << std::endl;
-        }
-        
-    }
-    
-};
-
-class MyClass{
-private:
-    int* data;
-
-public:
-    MyClass(int size){
-        
-        
-        data = new int[size];
-        
-        for (size_t i = 0; i < size; ++i) {
-            data[i] = 1;
-        }
-        
-        std::cout << "Object " << data << " The constructor has been called." << std::endl;
-    }
-    
-    // Всегда один деструтор в классе
-    ~MyClass(){
-        
-        delete[] data;
-        std:: cout << "Object " << data << " The destructor has been called." << std::endl;
-    }
-    
-};
-
-
-void func(){
-    
-    std::cout << "FUNC. Start of execution" << std::endl;
-    MyClass a(1);
-    std::cout << "FUNC. End of execution." << std::endl;
-};
-
 
 int main(){
     
-    func();
-    // Объекты уничтожаются в порядке обратно тому в котором они создавались
+    Point a;
+    a.SetY(5);
+    a.Print();
     
     return 0;
 }
