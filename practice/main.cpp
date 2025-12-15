@@ -4,7 +4,7 @@
 
 /*
  
- Инкапсуляция. Методы get и set
+ Перегрузка конструкторов класса
 
  */
 
@@ -18,10 +18,32 @@ private:
 
 public:
     
+    // Перегрузка 1
+    Point(){
+        x = 0;
+        y = 0;
+    };
+    
+    // Перегрузка 2
     Point(int valueX, int valueY){
         x = valueX;
         y = valueY;
     }
+    
+    // Перегрузка 3
+    Point(int valueX, bool boolean){
+        
+        x = valueX;
+        
+        if(boolean)
+        {
+            y = 1;
+        } else
+        {
+            y = -1;
+        }
+        
+    };
     
     int GetY(){ return y; }
     void SetY(int valueY) { y = valueY; }
@@ -57,7 +79,15 @@ public:
 
 int main(){
     
-    Point a(3, 4);
-
+    Point a;
+    a.Print();
+    
+    Point b(3, 5);
+    b.Print();
+    
+    
+    Point c(3, false); // if true y = 1, else -1
+    c.Print();
+    
     return 0;
 }
