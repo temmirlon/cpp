@@ -80,6 +80,8 @@ public:
     int *data;
     
     MyClass(int size){
+        
+        this->Size = size;
         // Создание массива
         this->data = new int[size];
         
@@ -91,10 +93,29 @@ public:
         std::cout << "The constructor has been called. " << this << std::endl;
     };
     
+    // Конструктор копирования
+    MyClass(const MyClass &other){
+        
+        this->Size = other.Size;
+        
+        // Выделяем новое место в памяти под массив
+        this->data = new int[other.Size];
+        for (int i = 0; i < other.Size; i++)
+        {
+            /* Присваиваем значения из другого (старого) объекта*/
+            this->data[i] = other.data[i];
+        }
+        
+        std::cout << "The 'COPY' constructor has been called. " << this << std::endl;
+    }
+    
     ~MyClass(){
         std:: cout << "The destructor has been called. " << this << std::endl;
         delete[] data;
-    }
+    };
+    
+private:
+    int Size;
     
 };
 
